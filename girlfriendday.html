@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>for neii</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -26,14 +26,12 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        body {
+        body, html {
+            width: 100%;
+            height: 100%;
             background: radial-gradient(circle at center, var(--bg-light) 0%, var(--bg-dark) 100%);
             color: #fff;
             font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             overflow: hidden;
             position: relative;
         }
@@ -56,6 +54,8 @@
         /* --- STAGE 1: ENVELOPE --- */
         #stage-envelope {
             position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
             cursor: pointer;
             transition: opacity 0.8s ease, transform 0.8s ease;
             z-index: 10;
@@ -63,8 +63,8 @@
         }
 
         @keyframes floatEnvelope {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-12px) scale(1.02); }
+            0%, 100% { transform: translate(-50%, -50%) translateY(0) scale(1); }
+            50% { transform: translate(-50%, -50%) translateY(-12px) scale(1.02); }
         }
 
         .envelope {
@@ -74,6 +74,7 @@
             position: relative;
             border-radius: 8px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            max-width: 90vw;
         }
 
         .flap {
@@ -128,18 +129,20 @@
         /* --- STAGE 2: FLOWER & PHOTOS --- */
         #stage-flower {
             position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
             display: flex;
             flex-direction: column;
             align-items: center;
             opacity: 0;
-            transform: scale(0.8) translateY(30px);
             transition: opacity 1s ease, transform 1s ease;
             pointer-events: none;
             z-index: 5;
+            width: 100%;
         }
         #stage-flower.visible {
             opacity: 1;
-            transform: scale(1) translateY(0);
+            transform: translate(-50%, -50%) scale(1);
             pointer-events: auto;
         }
 
@@ -188,7 +191,6 @@
         .bloom .stem { stroke-dashoffset: 0; }
         .bloom .leaf-right, .bloom .leaf-left, .bloom .petal, .bloom .center-flower { opacity: 1; transform: scale(1); }
 
-        /* BINGKAI FOTO BUNGA DIPERBESAR DAN DIBERI TEMPAT AKSESORIS */
         .flower-box {
             position: absolute;
             opacity: 0;
@@ -244,16 +246,17 @@
         }
         .btn-next:hover { background: var(--pink-frame); box-shadow: 0 0 15px var(--pink-frame); transform: scale(1.05); }
 
-        /* --- STAGE 3: SCROLLABLE CONTENT --- */
+        /* --- STAGE 3: SCROLLABLE CONTENT (DIJAMIN BISA DI-SCROLL FULL SAMPAI BAWAH) --- */
         #stage-scroll {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 50px 20px;
+            padding: 40px 5% 120px 5%; /* PADDING BAWAH DIBIKIN LEGA SUPAYA CANVAS 3D GAK KEPOTONG */
             opacity: 0;
             transform: scale(0.9) translateY(20px);
             transition: opacity 1s ease, transform 1s ease;
@@ -266,6 +269,13 @@
             pointer-events: auto;
         }
 
+        .message-box, .garden-container, .gallery-container, .canvas-container {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 30px;
+            flex-shrink: 0;
+        }
+
         .message-box {
             position: relative;
             text-align: center;
@@ -276,16 +286,12 @@
             padding: 35px 25px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255,255,255,0.05);
-            max-width: 400px;
-            width: 100%;
-            margin-bottom: 25px;
         }
 
         .message-box::before {
             content: '💖';
             position: absolute;
-            top: -12px;
-            left: 15px;
+            top: -12px; left: 15px;
             font-size: 22px;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
             animation: bounceIcon 2s infinite ease-in-out;
@@ -294,8 +300,7 @@
         .message-box::after {
             content: '✨';
             position: absolute;
-            bottom: -10px;
-            right: 15px;
+            bottom: -10px; right: 15px;
             font-size: 22px;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
             animation: bounceIcon 2s infinite ease-in-out 1s;
@@ -335,15 +340,12 @@
             display: inline-block;
         }
 
-        /* MULTI-FLOWER GARDEN CONTAINER */
         .garden-container {
-            width: 100%;
-            max-width: 400px;
-            height: 220px;
+            height: auto;
+            aspect-ratio: 16/9;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
             position: relative;
             filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.3));
         }
@@ -352,7 +354,6 @@
             height: 100%;
         }
 
-        /* GALLERY SECTION */
         .gallery-container {
             position: relative;
             background: var(--glass-bg);
@@ -362,10 +363,7 @@
             padding: 25px 20px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            max-width: 400px;
-            width: 100%;
             text-align: center;
-            margin-bottom: 40px;
         }
 
         .gallery-container h2 {
@@ -388,10 +386,8 @@
 
         .frame-accessory {
             position: absolute;
-            top: -18px;
-            right: -15px;
-            width: 55px;
-            height: auto;
+            top: -18px; right: -15px;
+            width: 55px; height: auto;
             z-index: 30;
             pointer-events: none;
             filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
@@ -430,6 +426,26 @@
         }
         .gal-btn:hover { background: var(--pink-frame); }
 
+        /* CANVAS 3D BUCIN CONTAINER (FIXED HEIGHT SUPAYA GAK KEPOTONG SAAT DISCROLL) */
+        .canvas-container {
+            width: 100%;
+            max-width: 500px;
+            height: 380px;
+            background-color: #000000;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255, 75, 145, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        #loveCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
         /* --- SVG HEART BURST PARTICLES --- */
         .heart-particle {
             position: absolute;
@@ -445,6 +461,25 @@
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
             20% { opacity: 1; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.2); }
             100% { opacity: 0; transform: translate(calc(-50% + var(--tx) * 1.5), calc(-50% + var(--ty) * 1.5 - 80px)) scale(1.6); }
+        }
+
+        /* MEDIA QUERIES UNTUK PC / LAYAR LEBAR */
+        @media (min-width: 768px) {
+            .message-box, .garden-container, .gallery-container, .canvas-container {
+                max-width: 700px;
+            }
+            .romantic-text {
+                font-size: 1.25rem;
+            }
+            .romantic-text strong {
+                font-size: 2.5rem;
+            }
+            .slider {
+                height: 450px;
+            }
+            .canvas-container {
+                height: 480px;
+            }
         }
     </style>
 </head>
@@ -495,17 +530,14 @@
                 <circle class="center-flower" cx="75" cy="74" r="15" />
             </svg>
             
-            <!-- Foto 1 dengan aksesoris -->
             <div class="flower-box b1">
                 <img src="1785489508514.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
                 <img src="IMG-20260715-WA0067.jpg" class="flower-photo" alt="Foto 1">
             </div>
-            <!-- Foto 2 dengan aksesoris -->
             <div class="flower-box b2">
                 <img src="1785489597195.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
                 <img src="IMG-20260728-WA0045.jpg" class="flower-photo" alt="Foto 2">
             </div>
-            <!-- Foto 3 dengan aksesoris -->
             <div class="flower-box b3">
                 <img src="1785489651659.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
                 <img src="IMG-20260731-WA0002.jpg" class="flower-photo" alt="Foto 3">
@@ -514,7 +546,7 @@
         <button class="btn-next" id="btn-next" onclick="showScrollStage()">Baca Pesanku ❤️</button>
     </div>
 
-    <!-- STAGE 3: SCROLLABLE CONTENT (TEXT + MULTI-FLOWER GARDEN + GALLERY) -->
+    <!-- STAGE 3: SCROLLABLE CONTENT (TEXT + GARDEN + GALLERY + 3D CANVAS) -->
     <div id="stage-scroll">
         <div class="message-box">
             <p class="romantic-text">
@@ -527,7 +559,7 @@
 
         <!-- KEBUN BUNGA -->
         <div class="garden-container">
-            <svg class="garden-svg" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg">
+            <svg class="garden-svg" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                 <defs>
                     <radialGradient id="g-petal" cx="40%" cy="40%" r="60%">
                         <stop offset="0%" stop-color="#ffb3c6" />
@@ -590,19 +622,25 @@
             </svg>
         </div>
 
+        <!-- GALLERY -->
         <div class="gallery-container">
             <h2>Our Memories ❤️</h2>
             <div class="slider">
-                <img src="1785486948953.png" class="frame-accessory" alt="Aksesoris Bingkai" onerror="this.style.display='none'">
+                <img src="accessory.png" class="frame-accessory" alt="" onerror="this.style.display='none'">
                 
-                <img src="1782214021943.png" class="slide-img active" alt="Memori 1">
-                <img src="selfie-time-1784449351818.jpg" class="slide-img" alt="Memori 2">
-                <img src="IMG-20260725-WA0031.jpg" class="slide-img" alt="Memori 3">
+                <img src="IMG-20260715-WA0067.jpg" class="slide-img active" alt="Memori 1">
+                <img src="IMG-20260728-WA0045.jpg" class="slide-img" alt="Memori 2">
+                <img src="IMG-20260731-WA0002.jpg" class="slide-img" alt="Memori 3">
             </div>
             <div class="gallery-btns">
                 <button class="gal-btn" onclick="prevSlide()">❮ Sebelumnya</button>
                 <button class="gal-btn" onclick="nextSlide()">Selanjutnya ❯</button>
             </div>
+        </div>
+
+        <!-- CANVAS 3D ANIMASI (DI BAGIAN PALING BAWAH, BISA DI-SCROLL PENUH) -->
+        <div class="canvas-container">
+            <canvas id="loveCanvas"></canvas>
         </div>
     </div>
 
@@ -665,7 +703,7 @@
 
             setTimeout(() => {
                 stageEnvelope.style.opacity = '0';
-                stageEnvelope.style.transform = 'translateY(-150px) scale(0.7)';
+                stageEnvelope.style.transform = 'translate(-50%, -50%) translateY(-150px) scale(0.7)';
                 
                 setTimeout(() => {
                     stageEnvelope.style.display = 'none';
@@ -686,12 +724,13 @@
             const stageScroll = document.getElementById('stage-scroll');
 
             stageFlower.style.opacity = '0';
-            stageFlower.style.transform = 'scale(0.8) translateY(-30px)';
+            stageFlower.style.transform = 'translate(-50%, -50%) scale(0.8) translateY(-30px)';
             
             setTimeout(() => {
                 stageFlower.style.display = 'none';
                 stageScroll.classList.add('visible');
                 calculateDays(); 
+                init3DHeart();
             }, 1000);
         }
 
@@ -715,6 +754,134 @@
         function prevSlide() {
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
             showSlide(currentSlide);
+        }
+
+        /* --- SCRIPT CANVAS 3D HEART --- */
+        let heartAnimationId;
+        function init3DHeart() {
+            if (heartAnimationId) return; 
+
+            const canvas = document.getElementById('loveCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function sesuaikanLayar() {
+                canvas.width = canvas.parentElement.clientWidth || 400;
+                canvas.height = canvas.parentElement.clientHeight || 350;
+            }
+            window.addEventListener('resize', sesuaikanLayar);
+            sesuaikanLayar();
+
+            const teksBucin = "I love you";
+            const namaPacar = "Neii"; 
+            
+            let sudutY = 0;              
+            const sudutX = 0.4;          
+            let aliranTeks = 0;          
+            const jumlahTitik = 160;     
+
+            function render3DHeart() {
+                ctx.fillStyle = '#000000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                sudutY += 0.013; 
+                aliranTeks -= 0.01;
+
+                const tengahX = canvas.width / 2;
+                const tengahY = canvas.height / 2;
+                const skalaHati = Math.min(canvas.width, canvas.height) / 45;
+
+                let kumpulanTitik = [];
+
+                for (let i = 0; i < jumlahTitik; i++) {
+                    let t = (i / jumlahTitik) * Math.PI * 2 + aliranTeks;
+
+                    let xDasar = 16 * Math.pow(Math.sin(t), 3);
+                    let yDasar = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+                    let zDasar = Math.sin(t * 2) * 3; 
+
+                    let xRotasiY = xDasar * Math.cos(sudutY) - zDasar * Math.sin(sudutY);
+                    let zRotasiY = xDasar * Math.sin(sudutY) + zDasar * Math.cos(sudutY);
+
+                    let yRotasiX = yDasar * Math.cos(sudutX) - zRotasiY * Math.sin(sudutX);
+                    let zFinal = yDasar * Math.sin(sudutX) + zRotasiY * Math.cos(sudutX);
+
+                    kumpulanTitik.push({
+                        x: xRotasiY * skalaHati,
+                        y: yRotasiX * skalaHati,
+                        z: zFinal, 
+                        indeks: i
+                    });
+                }
+
+                kumpulanTitik.sort((a, b) => a.z - b.z);
+
+                let namaSudahDigambar = false;
+
+                kumpulanTitik.forEach(titik => {
+                    if (titik.z > 0 && !namaSudahDigambar) {
+                        ctx.save();
+                        ctx.translate(tengahX, tengahY);
+                        
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "middle";
+
+                        let efekDenyut = 1 + Math.sin(sudutY * 2.5) * 0.06;
+                        let ukuranNama = (Math.min(canvas.width, canvas.height) / 10) * efekDenyut;
+                        
+                        ctx.font = `${ukuranNama}px 'Great Vibes', cursive`;
+                        ctx.fillStyle = "rgba(255, 215, 230, 0.85)";
+                        ctx.shadowBlur = 15;
+                        ctx.shadowColor = "#ff4b91";
+
+                        ctx.fillText(namaPacar, 0, -5); 
+                        ctx.restore();
+                        namaSudahDigambar = true;
+                    }
+
+                    ctx.save();
+                    ctx.translate(tengahX + titik.x, tengahY + titik.y);
+                    ctx.rotate(-30 * Math.PI / 180);
+
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+
+                    let faktorKedalaman = (titik.z + 20) / 40; 
+                    let ukuranFont = 7 + (faktorKedalaman * 4); 
+                    ctx.font = `bold ${ukuranFont}px 'Arial', sans-serif`;
+
+                    let kecerahanTeks = 40 + (faktorKedalaman * 45); 
+                    let transparansi = 0.2 + (faktorKedalaman * 0.8); 
+                    
+                    ctx.fillStyle = `hsla(335, 100%, ${kecerahanTeks}%, ${transparansi})`;
+
+                    if (titik.z > 0) {
+                        ctx.shadowBlur = 4;
+                        ctx.shadowColor = "#ff4b91";
+                    } else {
+                        ctx.shadowBlur = 0;
+                    }
+
+                    ctx.fillText(teksBucin, 0, 0);
+                    ctx.restore();
+                });
+
+                if (!namaSudahDigambar) {
+                    ctx.save();
+                    ctx.translate(tengahX, tengahY);
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    let ukuranNama = Math.min(canvas.width, canvas.height) / 10;
+                    ctx.font = `${ukuranNama}px 'Great Vibes', cursive`;
+                    ctx.fillStyle = "rgba(255, 215, 230, 0.85)";
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = "#ff4b91";
+                    ctx.fillText(namaPacar, 0, -5);
+                    ctx.restore();
+                }
+
+                heartAnimationId = requestAnimationFrame(render3DHeart);
+            }
+            render3DHeart();
         }
     </script>
 </body>
