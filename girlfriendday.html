@@ -479,7 +479,7 @@
                 <circle class="center-flower" cx="75" cy="74" r="15" />
             </svg>
             
-            <img src="IMG-20260715-WA0067.jpg" class="flower-photo p1" alt="Foto 1">
+            <img src="IMG-20260716-WA0053.jpg" class="flower-photo p1" alt="Foto 1">
             <img src="IMG-20260728-WA0045.jpg" class="flower-photo p2" alt="Foto 2">
             <img src="IMG-20260731-WA0002.jpg" class="flower-photo p3" alt="Foto 3">
         </div>
@@ -525,4 +525,170 @@
                 <path d="M280,200 Q310,160 330,200 Z" fill="url(#g-leaf)" opacity="0.75"/>
 
                 <path d="M100,200 C100,150 80,100 95,65" fill="none" stroke="#2eb86b" stroke-width="4" stroke-linecap="round"/>
-                <path d="M175
+                <path d="M175,200 C175,140 165,80 175,45" fill="none" stroke="#2eb86b" stroke-width="4.5" stroke-linecap="round"/>
+                <path d="M245,200 C245,150 270,100 255,60" fill="none" stroke="#2eb86b" stroke-width="4" stroke-linecap="round"/>
+
+                <path d="M90,135 Q70,125 65,110 Q80,120 90,135" fill="url(#g-leaf)"/>
+                <path d="M170,120 Q145,110 140,95 Q155,105 170,120" fill="url(#g-leaf)"/>
+                <path d="M180,150 Q205,140 210,125 Q195,135 180,150" fill="url(#g-leaf)"/>
+                <path d="M250,130 Q275,120 280,105 Q265,115 250,130" fill="url(#g-leaf)"/>
+
+                <g transform="translate(95, 65)">
+                    <circle cx="0" cy="-16" r="14" fill="url(#g-petal)"/>
+                    <circle cx="-15" cy="-5" r="14" fill="url(#g-petal)"/>
+                    <circle cx="15" cy="-5" r="14" fill="url(#g-petal)"/>
+                    <circle cx="-9" cy="12" r="14" fill="url(#g-petal)"/>
+                    <circle cx="9" cy="12" r="14" fill="url(#g-petal)"/>
+                    <circle cx="0" cy="0" r="9" fill="url(#g-center)"/>
+                </g>
+
+                <g transform="translate(175, 45)">
+                    <circle cx="0" cy="-16" r="15" fill="url(#g-petal)"/>
+                    <circle cx="-15" cy="-5" r="15" fill="url(#g-petal)"/>
+                    <circle cx="15" cy="-5" r="15" fill="url(#g-petal)"/>
+                    <circle cx="-9" cy="12" r="15" fill="url(#g-petal)"/>
+                    <circle cx="9" cy="12" r="15" fill="url(#g-petal)"/>
+                    <circle cx="0" cy="0" r="10" fill="url(#g-center)"/>
+                </g>
+
+                <g transform="translate(255, 60)">
+                    <circle cx="0" cy="-16" r="14" fill="url(#g-petal)"/>
+                    <circle cx="-15" cy="-5" r="14" fill="url(#g-petal)"/>
+                    <circle cx="15" cy="-5" r="14" fill="url(#g-petal)"/>
+                    <circle cx="-9" cy="12" r="14" fill="url(#g-petal)"/>
+                    <circle cx="9" cy="12" r="14" fill="url(#g-petal)"/>
+                    <circle cx="0" cy="0" r="9" fill="url(#g-center)"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="gallery-container">
+            <h2>Our Memories ❤️</h2>
+            <div class="slider">
+                <img src="accessory.png" class="frame-accessory" alt="Aksesoris Bingkai" onerror="this.style.display='none'">
+                
+                <img src="IMG-20260716-WA0053.jpg" class="slide-img active" alt="Memori 1">
+                <img src="IMG-20260728-WA0045.jpg" class="slide-img" alt="Memori 2">
+                <img src="IMG-20260731-WA0002.jpg" class="slide-img" alt="Memori 3">
+            </div>
+            <div class="gallery-btns">
+                <button class="gal-btn" onclick="prevSlide()">❮ Sebelumnya</button>
+                <button class="gal-btn" onclick="nextSlide()">Selanjutnya ❯</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isOpened = false;
+        const music = document.getElementById('bg-music');
+
+        function createHearts() {
+            for(let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart-particle');
+                    heart.innerHTML = `<svg viewBox="0 0 32 29.6" width="22" height="22"><path fill="#ff3366" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.5-9.3,16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg>`;
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 40 + Math.random() * 90;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+                    
+                    heart.style.setProperty('--tx', `${tx}px`);
+                    heart.style.setProperty('--ty', `${ty}px`);
+                    
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3500);
+                }, i * 40); 
+            }
+        }
+
+        function calculateDays() {
+            const reconciliationDate = new Date('2026-06-21');
+            const today = new Date();
+            const diffTime = today - reconciliationDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays >= 0) {
+                document.getElementById('counter-text').innerText = `✨ Sudah ${diffDays} hari sejak kita balikan (21 Juni) ❤️`;
+            } else {
+                document.getElementById('counter-text').innerText = `✨ Menuju tanggal 21 Juni ❤️`;
+            }
+        }
+
+        function openEnvelope() {
+            if(isOpened) return;
+            isOpened = true;
+
+            const envelope = document.getElementById('envelope');
+            const stageEnvelope = document.getElementById('stage-envelope');
+            const stageFlower = document.getElementById('stage-flower');
+            const flowerWrapper = document.getElementById('flower-wrapper');
+            const btnNext = document.getElementById('btn-next');
+
+            music.play().catch(error => {
+                console.log("Autoplay dicegat browser.");
+            });
+
+            envelope.classList.add('open');
+
+            setTimeout(() => {
+                stageEnvelope.style.opacity = '0';
+                stageEnvelope.style.transform = 'translateY(-150px) scale(0.7)';
+                
+                setTimeout(() => {
+                    stageEnvelope.style.display = 'none';
+                    stageFlower.classList.add('visible');
+                    flowerWrapper.classList.add('bloom');
+                    createHearts(); 
+                    
+                    // Tombol baru muncul setelah animasi bunga sepenuhnya kelar (3.8 detik)
+                    setTimeout(() => {
+                        btnNext.classList.add('show');
+                    }, 3800);
+                    
+                }, 400); 
+            }, 600); 
+        }
+
+        function showScrollStage() {
+            const stageFlower = document.getElementById('stage-flower');
+            const stageScroll = document.getElementById('stage-scroll');
+
+            stageFlower.style.opacity = '0';
+            stageFlower.style.transform = 'scale(0.8) translateY(-30px)';
+            
+            setTimeout(() => {
+                stageFlower.style.display = 'none';
+                stageScroll.classList.add('visible');
+                calculateDays(); 
+            }, 1000);
+        }
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-img');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+    </script>
+</body>
+</html>
