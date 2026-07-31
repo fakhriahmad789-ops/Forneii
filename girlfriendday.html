@@ -188,39 +188,23 @@
         .bloom .stem { stroke-dashoffset: 0; }
         .bloom .leaf-right, .bloom .leaf-left, .bloom .petal, .bloom .center-flower { opacity: 1; transform: scale(1); }
 
-        /* BINGKAI FOTO BUNGA DIPERBESAR DAN DIBERI TEMPAT AKSESORIS */
-        .flower-box {
+        .flower-photo {
             position: absolute;
+            max-width: 95px;
+            max-height: 95px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 4px solid var(--pink-frame);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
             opacity: 0;
             transform: scale(0) rotate(0deg);
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 10;
         }
 
-        .bloom .b1 { opacity: 1; transform: scale(1) rotate(-8deg); transition-delay: 2s; top: -5px; left: -25px; }
-        .bloom .b2 { opacity: 1; transform: scale(1) rotate(6deg); transition-delay: 2.3s; top: 95px; right: -35px; }
-        .bloom .b3 { opacity: 1; transform: scale(1) rotate(-6deg); transition-delay: 2.6s; top: 175px; left: -25px; }
-
-        .flower-photo {
-            width: 115px;
-            height: 115px;
-            border-radius: 14px;
-            object-fit: cover;
-            border: 4px solid var(--pink-frame);
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
-            display: block;
-        }
-
-        .flower-accessory {
-            position: absolute;
-            top: -14px;
-            right: -12px;
-            width: 42px;
-            height: auto;
-            z-index: 30;
-            pointer-events: none;
-            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.6));
-        }
+        .bloom .p1 { opacity: 1; transform: scale(1) rotate(-8deg); transition-delay: 2s; top: 10px; left: 0px; }
+        .bloom .p2 { opacity: 1; transform: scale(1) rotate(6deg); transition-delay: 2.3s; top: 110px; right: -10px; }
+        .bloom .p3 { opacity: 1; transform: scale(1) rotate(-6deg); transition-delay: 2.6s; top: 185px; left: 0px; }
 
         .btn-next {
             margin-top: 20px;
@@ -464,7 +448,7 @@
         </div>
     </div>
 
-    <!-- STAGE 2: BUNGA DAN FOTO DINAMIS DENGAN AKSESORIS -->
+    <!-- STAGE 2: BUNGA DAN FOTO DINAMIS -->
     <div id="stage-flower">
         <div class="flower-wrapper" id="flower-wrapper">
             <svg class="flower-svg" viewBox="0 0 150 250" xmlns="http://www.w3.org/2000/svg">
@@ -495,21 +479,9 @@
                 <circle class="center-flower" cx="75" cy="74" r="15" />
             </svg>
             
-            <!-- Foto 1 dengan aksesoris -->
-            <div class="flower-box b1">
-                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
-                <img src="IMG-20260715-WA0067.jpg" class="flower-photo" alt="Foto 1">
-            </div>
-            <!-- Foto 2 dengan aksesoris -->
-            <div class="flower-box b2">
-                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
-                <img src="IMG-20260728-WA0045.jpg" class="flower-photo" alt="Foto 2">
-            </div>
-            <!-- Foto 3 dengan aksesoris -->
-            <div class="flower-box b3">
-                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
-                <img src="IMG-20260731-WA0002.jpg" class="flower-photo" alt="Foto 3">
-            </div>
+            <img src="IMG-20260715-WA0067.jpg" class="flower-photo p1" alt="Foto 1">
+            <img src="IMG-20260728-WA0045.jpg" class="flower-photo p2" alt="Foto 2">
+            <img src="IMG-20260731-WA0002.jpg" class="flower-photo p3" alt="Foto 3">
         </div>
         <button class="btn-next" id="btn-next" onclick="showScrollStage()">Baca Pesanku ❤️</button>
     </div>
@@ -537,4 +509,20 @@
                     <linearGradient id="g-leaf" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="#52b788" />
                         <stop offset="100%" stop-color="#2d6a4f" />
-               
+                    </linearGradient>
+                    <radialGradient id="g-center" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fff3b0" />
+                        <stop offset="100%" stop-color="#e09f3e" />
+                    </radialGradient>
+                </defs>
+
+                <path d="M50,200 Q70,140 100,200 Z" fill="url(#g-leaf)" opacity="0.9"/>
+                <path d="M80,200 Q120,110 160,200 Z" fill="url(#g-leaf)" opacity="0.95"/>
+                <path d="M140,200 Q190,120 240,200 Z" fill="url(#g-leaf)" opacity="0.9"/>
+                <path d="M200,200 Q240,130 280,200 Z" fill="url(#g-leaf)" opacity="0.85"/>
+                <path d="M250,200 Q280,150 310,200 Z" fill="url(#g-leaf)" opacity="0.8"/>
+                <path d="M20,200 Q40,160 70,200 Z" fill="url(#g-leaf)" opacity="0.75"/>
+                <path d="M280,200 Q310,160 330,200 Z" fill="url(#g-leaf)" opacity="0.75"/>
+
+                <path d="M100,200 C100,150 80,100 95,65" fill="none" stroke="#2eb86b" stroke-width="4" stroke-linecap="round"/>
+                <path d="M175
