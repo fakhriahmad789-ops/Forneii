@@ -188,23 +188,39 @@
         .bloom .stem { stroke-dashoffset: 0; }
         .bloom .leaf-right, .bloom .leaf-left, .bloom .petal, .bloom .center-flower { opacity: 1; transform: scale(1); }
 
-        .flower-photo {
+        /* BINGKAI FOTO BUNGA DIPERBESAR DAN DIBERI TEMPAT AKSESORIS */
+        .flower-box {
             position: absolute;
-            max-width: 95px;
-            max-height: 95px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 4px solid var(--pink-frame);
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
             opacity: 0;
             transform: scale(0) rotate(0deg);
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 10;
         }
 
-        .bloom .p1 { opacity: 1; transform: scale(1) rotate(-8deg); transition-delay: 2s; top: 10px; left: 0px; }
-        .bloom .p2 { opacity: 1; transform: scale(1) rotate(6deg); transition-delay: 2.3s; top: 110px; right: -10px; }
-        .bloom .p3 { opacity: 1; transform: scale(1) rotate(-6deg); transition-delay: 2.6s; top: 185px; left: 0px; }
+        .bloom .b1 { opacity: 1; transform: scale(1) rotate(-8deg); transition-delay: 2s; top: -5px; left: -25px; }
+        .bloom .b2 { opacity: 1; transform: scale(1) rotate(6deg); transition-delay: 2.3s; top: 95px; right: -35px; }
+        .bloom .b3 { opacity: 1; transform: scale(1) rotate(-6deg); transition-delay: 2.6s; top: 175px; left: -25px; }
+
+        .flower-photo {
+            width: 115px;
+            height: 115px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 4px solid var(--pink-frame);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+            display: block;
+        }
+
+        .flower-accessory {
+            position: absolute;
+            top: -14px;
+            right: -12px;
+            width: 42px;
+            height: auto;
+            z-index: 30;
+            pointer-events: none;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.6));
+        }
 
         .btn-next {
             margin-top: 20px;
@@ -448,7 +464,7 @@
         </div>
     </div>
 
-    <!-- STAGE 2: BUNGA DAN FOTO DINAMIS -->
+    <!-- STAGE 2: BUNGA DAN FOTO DINAMIS DENGAN AKSESORIS -->
     <div id="stage-flower">
         <div class="flower-wrapper" id="flower-wrapper">
             <svg class="flower-svg" viewBox="0 0 150 250" xmlns="http://www.w3.org/2000/svg">
@@ -479,9 +495,21 @@
                 <circle class="center-flower" cx="75" cy="74" r="15" />
             </svg>
             
-            <img src="IMG-20260715-WA0067.jpg" class="flower-photo p1" alt="Foto 1">
-            <img src="IMG-20260728-WA0045.jpg" class="flower-photo p2" alt="Foto 2">
-            <img src="IMG-20260731-WA0002.jpg" class="flower-photo p3" alt="Foto 3">
+            <!-- Foto 1 dengan aksesoris -->
+            <div class="flower-box b1">
+                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
+                <img src="IMG-20260715-WA0067.jpg" class="flower-photo" alt="Foto 1">
+            </div>
+            <!-- Foto 2 dengan aksesoris -->
+            <div class="flower-box b2">
+                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
+                <img src="IMG-20260728-WA0045.jpg" class="flower-photo" alt="Foto 2">
+            </div>
+            <!-- Foto 3 dengan aksesoris -->
+            <div class="flower-box b3">
+                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
+                <img src="IMG-20260731-WA0002.jpg" class="flower-photo" alt="Foto 3">
+            </div>
         </div>
         <button class="btn-next" id="btn-next" onclick="showScrollStage()">Baca Pesanku ❤️</button>
     </div>
@@ -509,186 +537,4 @@
                     <linearGradient id="g-leaf" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="#52b788" />
                         <stop offset="100%" stop-color="#2d6a4f" />
-                    </linearGradient>
-                    <radialGradient id="g-center" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#fff3b0" />
-                        <stop offset="100%" stop-color="#e09f3e" />
-                    </radialGradient>
-                </defs>
-
-                <path d="M50,200 Q70,140 100,200 Z" fill="url(#g-leaf)" opacity="0.9"/>
-                <path d="M80,200 Q120,110 160,200 Z" fill="url(#g-leaf)" opacity="0.95"/>
-                <path d="M140,200 Q190,120 240,200 Z" fill="url(#g-leaf)" opacity="0.9"/>
-                <path d="M200,200 Q240,130 280,200 Z" fill="url(#g-leaf)" opacity="0.85"/>
-                <path d="M250,200 Q280,150 310,200 Z" fill="url(#g-leaf)" opacity="0.8"/>
-                <path d="M20,200 Q40,160 70,200 Z" fill="url(#g-leaf)" opacity="0.75"/>
-                <path d="M280,200 Q310,160 330,200 Z" fill="url(#g-leaf)" opacity="0.75"/>
-
-                <path d="M100,200 C100,150 80,100 95,65" fill="none" stroke="#2eb86b" stroke-width="4" stroke-linecap="round"/>
-                <path d="M175,200 C175,140 165,80 175,45" fill="none" stroke="#2eb86b" stroke-width="4.5" stroke-linecap="round"/>
-                <path d="M245,200 C245,150 270,100 255,60" fill="none" stroke="#2eb86b" stroke-width="4" stroke-linecap="round"/>
-
-                <path d="M90,135 Q70,125 65,110 Q80,120 90,135" fill="url(#g-leaf)"/>
-                <path d="M170,120 Q145,110 140,95 Q155,105 170,120" fill="url(#g-leaf)"/>
-                <path d="M180,150 Q205,140 210,125 Q195,135 180,150" fill="url(#g-leaf)"/>
-                <path d="M250,130 Q275,120 280,105 Q265,115 250,130" fill="url(#g-leaf)"/>
-
-                <g transform="translate(95, 65)">
-                    <circle cx="0" cy="-16" r="14" fill="url(#g-petal)"/>
-                    <circle cx="-15" cy="-5" r="14" fill="url(#g-petal)"/>
-                    <circle cx="15" cy="-5" r="14" fill="url(#g-petal)"/>
-                    <circle cx="-9" cy="12" r="14" fill="url(#g-petal)"/>
-                    <circle cx="9" cy="12" r="14" fill="url(#g-petal)"/>
-                    <circle cx="0" cy="0" r="9" fill="url(#g-center)"/>
-                </g>
-
-                <g transform="translate(175, 45)">
-                    <circle cx="0" cy="-16" r="15" fill="url(#g-petal)"/>
-                    <circle cx="-15" cy="-5" r="15" fill="url(#g-petal)"/>
-                    <circle cx="15" cy="-5" r="15" fill="url(#g-petal)"/>
-                    <circle cx="-9" cy="12" r="15" fill="url(#g-petal)"/>
-                    <circle cx="9" cy="12" r="15" fill="url(#g-petal)"/>
-                    <circle cx="0" cy="0" r="10" fill="url(#g-center)"/>
-                </g>
-
-                <g transform="translate(255, 60)">
-                    <circle cx="0" cy="-16" r="14" fill="url(#g-petal)"/>
-                    <circle cx="-15" cy="-5" r="14" fill="url(#g-petal)"/>
-                    <circle cx="15" cy="-5" r="14" fill="url(#g-petal)"/>
-                    <circle cx="-9" cy="12" r="14" fill="url(#g-petal)"/>
-                    <circle cx="9" cy="12" r="14" fill="url(#g-petal)"/>
-                    <circle cx="0" cy="0" r="9" fill="url(#g-center)"/>
-                </g>
-            </svg>
-        </div>
-
-        <div class="gallery-container">
-            <h2>Our Memories ❤️</h2>
-            <div class="slider">
-                <img src="1785486948953.png" class="frame-accessory" alt="Aksesoris Bingkai" onerror="this.style.display='none'">
-                
-                <img src="IMG-20260716-WA0053.jpg" class="slide-img active" alt="Memori 1">
-                <img src="IMG-20260725-WA0031.jpg" class="slide-img" alt="Memori 2">
-                <img src="selfie-time-1784449351818.jpg" class="slide-img" alt="Memori 3">
-            </div>
-            <div class="gallery-btns">
-                <button class="gal-btn" onclick="prevSlide()">❮ Sebelumnya</button>
-                <button class="gal-btn" onclick="nextSlide()">Selanjutnya ❯</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let isOpened = false;
-        const music = document.getElementById('bg-music');
-
-        function createHearts() {
-            for(let i = 0; i < 25; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.classList.add('heart-particle');
-                    heart.innerHTML = `<svg viewBox="0 0 32 29.6" width="22" height="22"><path fill="#ff3366" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.5-9.3,16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg>`;
-                    
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = 40 + Math.random() * 90;
-                    const tx = Math.cos(angle) * distance;
-                    const ty = Math.sin(angle) * distance;
-                    
-                    heart.style.setProperty('--tx', `${tx}px`);
-                    heart.style.setProperty('--ty', `${ty}px`);
-                    
-                    heart.style.left = '50%';
-                    heart.style.top = '50%';
-                    
-                    document.body.appendChild(heart);
-                    setTimeout(() => heart.remove(), 3500);
-                }, i * 40); 
-            }
-        }
-
-        function calculateDays() {
-            const reconciliationDate = new Date('2026-06-21');
-            const today = new Date();
-            const diffTime = today - reconciliationDate;
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            
-            if (diffDays >= 0) {
-                document.getElementById('counter-text').innerText = `✨ Sudah ${diffDays} hari sejak kita balikan (21 Juni) ❤️`;
-            } else {
-                document.getElementById('counter-text').innerText = `✨ Menuju tanggal 21 Juni ❤️`;
-            }
-        }
-
-        function openEnvelope() {
-            if(isOpened) return;
-            isOpened = true;
-
-            const envelope = document.getElementById('envelope');
-            const stageEnvelope = document.getElementById('stage-envelope');
-            const stageFlower = document.getElementById('stage-flower');
-            const flowerWrapper = document.getElementById('flower-wrapper');
-            const btnNext = document.getElementById('btn-next');
-
-            music.play().catch(error => {
-                console.log("Autoplay dicegat browser.");
-            });
-
-            envelope.classList.add('open');
-
-            setTimeout(() => {
-                stageEnvelope.style.opacity = '0';
-                stageEnvelope.style.transform = 'translateY(-150px) scale(0.7)';
-                
-                setTimeout(() => {
-                    stageEnvelope.style.display = 'none';
-                    stageFlower.classList.add('visible');
-                    flowerWrapper.classList.add('bloom');
-                    createHearts(); 
-                    
-                    // Tombol baru muncul setelah animasi bunga sepenuhnya kelar (3.8 detik)
-                    setTimeout(() => {
-                        btnNext.classList.add('show');
-                    }, 3800);
-                    
-                }, 400); 
-            }, 600); 
-        }
-
-        function showScrollStage() {
-            const stageFlower = document.getElementById('stage-flower');
-            const stageScroll = document.getElementById('stage-scroll');
-
-            stageFlower.style.opacity = '0';
-            stageFlower.style.transform = 'scale(0.8) translateY(-30px)';
-            
-            setTimeout(() => {
-                stageFlower.style.display = 'none';
-                stageScroll.classList.add('visible');
-                calculateDays(); 
-            }, 1000);
-        }
-
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-img');
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                if (i === index) {
-                    slide.classList.add('active');
-                }
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
-        }
-    </script>
-</body>
-</html>
+               
