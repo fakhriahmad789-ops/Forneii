@@ -188,23 +188,39 @@
         .bloom .stem { stroke-dashoffset: 0; }
         .bloom .leaf-right, .bloom .leaf-left, .bloom .petal, .bloom .center-flower { opacity: 1; transform: scale(1); }
 
-        .flower-photo {
+        /* BINGKAI FOTO BUNGA DIPERBESAR DAN DIBERI TEMPAT AKSESORIS */
+        .flower-box {
             position: absolute;
-            max-width: 95px;
-            max-height: 95px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 4px solid var(--pink-frame);
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
             opacity: 0;
             transform: scale(0) rotate(0deg);
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 10;
         }
 
-        .bloom .p1 { opacity: 1; transform: scale(1) rotate(-8deg); transition-delay: 2s; top: 10px; left: 0px; }
-        .bloom .p2 { opacity: 1; transform: scale(1) rotate(6deg); transition-delay: 2.3s; top: 110px; right: -10px; }
-        .bloom .p3 { opacity: 1; transform: scale(1) rotate(-6deg); transition-delay: 2.6s; top: 185px; left: 0px; }
+        .bloom .b1 { opacity: 1; transform: scale(1) rotate(-8deg); transition-delay: 2s; top: -5px; left: -25px; }
+        .bloom .b2 { opacity: 1; transform: scale(1) rotate(6deg); transition-delay: 2.3s; top: 95px; right: -35px; }
+        .bloom .b3 { opacity: 1; transform: scale(1) rotate(-6deg); transition-delay: 2.6s; top: 175px; left: -25px; }
+
+        .flower-photo {
+            width: 115px;
+            height: 115px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 4px solid var(--pink-frame);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+            display: block;
+        }
+
+        .flower-accessory {
+            position: absolute;
+            top: -14px;
+            right: -12px;
+            width: 42px;
+            height: auto;
+            z-index: 30;
+            pointer-events: none;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.6));
+        }
 
         .btn-next {
             margin-top: 20px;
@@ -448,7 +464,7 @@
         </div>
     </div>
 
-    <!-- STAGE 2: BUNGA DAN FOTO DINAMIS -->
+    <!-- STAGE 2: BUNGA DAN FOTO DINAMIS DENGAN AKSESORIS -->
     <div id="stage-flower">
         <div class="flower-wrapper" id="flower-wrapper">
             <svg class="flower-svg" viewBox="0 0 150 250" xmlns="http://www.w3.org/2000/svg">
@@ -479,9 +495,21 @@
                 <circle class="center-flower" cx="75" cy="74" r="15" />
             </svg>
             
-            <img src="IMG-20260716-WA0053.jpg" class="flower-photo p1" alt="Foto 1">
-            <img src="IMG-20260728-WA0045.jpg" class="flower-photo p2" alt="Foto 2">
-            <img src="IMG-20260731-WA0002.jpg" class="flower-photo p3" alt="Foto 3">
+            <!-- Foto 1 dengan aksesoris -->
+            <div class="flower-box b1">
+                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
+                <img src="IMG-20260715-WA0067.jpg" class="flower-photo" alt="Foto 1">
+            </div>
+            <!-- Foto 2 dengan aksesoris -->
+            <div class="flower-box b2">
+                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
+                <img src="IMG-20260728-WA0045.jpg" class="flower-photo" alt="Foto 2">
+            </div>
+            <!-- Foto 3 dengan aksesoris -->
+            <div class="flower-box b3">
+                <img src="accessory.png" class="flower-accessory" alt="" onerror="this.style.display='none'">
+                <img src="IMG-20260731-WA0002.jpg" class="flower-photo" alt="Foto 3">
+            </div>
         </div>
         <button class="btn-next" id="btn-next" onclick="showScrollStage()">Baca Pesanku ❤️</button>
     </div>
@@ -567,7 +595,7 @@
             <div class="slider">
                 <img src="accessory.png" class="frame-accessory" alt="Aksesoris Bingkai" onerror="this.style.display='none'">
                 
-                <img src="IMG-20260716-WA0053.jpg" class="slide-img active" alt="Memori 1">
+                <img src="IMG-20260715-WA0067.jpg" class="slide-img active" alt="Memori 1">
                 <img src="IMG-20260728-WA0045.jpg" class="slide-img" alt="Memori 2">
                 <img src="IMG-20260731-WA0002.jpg" class="slide-img" alt="Memori 3">
             </div>
@@ -645,7 +673,6 @@
                     flowerWrapper.classList.add('bloom');
                     createHearts(); 
                     
-                    // Tombol baru muncul setelah animasi bunga sepenuhnya kelar (3.8 detik)
                     setTimeout(() => {
                         btnNext.classList.add('show');
                     }, 3800);
